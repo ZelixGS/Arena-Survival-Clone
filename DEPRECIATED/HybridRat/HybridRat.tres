@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="EntityStats" load_steps=2 format=3 uid="uid://3cyud5gy1rlg"]
+
+[ext_resource type="Script" path="res://Scenes/Mobs/EntityStats.gd" id="1_7leig"]
+
+[resource]
+script = ExtResource("1_7leig")
+damage = 10
+firerate = 1.0
+health = 10
+randomize_health = 1.2
+knockback_resistance = 1.0
+speed = 1600
+use_soft_collision = true
+soft_collision_force = 400.0

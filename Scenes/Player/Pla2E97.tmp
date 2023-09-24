@@ -1,0 +1,71 @@
+[gd_scene load_steps=11 format=3 uid="uid://d0cs8e8rjs441"]
+
+[ext_resource type="Script" path="res://Scenes/Player/Player.gd" id="1_frh8t"]
+[ext_resource type="Texture2D" uid="uid://csnsbvvk2skt" path="res://Assets/Sprites/tilemap_packed.png" id="2_bat2w"]
+[ext_resource type="PackedScene" uid="uid://di8riafuqjxhw" path="res://Scenes/Components/Health/HealthComponent.tscn" id="3_13did"]
+[ext_resource type="Script" path="res://Scenes/Player/Axis.gd" id="4_vhwjb"]
+[ext_resource type="PackedScene" uid="uid://ctb653eyuyi78" path="res://Scenes/Components/Hitbox/HitBoxComponent.tscn" id="5_qcf22"]
+[ext_resource type="PackedScene" uid="uid://byiw52mx5v3k6" path="res://Scenes/Abilities/ThrowingAxe/ThrowingAxeComponent.tscn" id="7_4xc1a"]
+[ext_resource type="PackedScene" uid="uid://dwhirbiggc420" path="res://Scenes/Components/Hurtbox/HurtBoxComponent.tscn" id="7_wy6li"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rpmbu"]
+radius = 5.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2geww"]
+radius = 7.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ceyae"]
+radius = 15.0
+
+[node name="Player" type="CharacterBody2D" groups=["player"]]
+z_index = 2
+collision_layer = 2
+collision_mask = 5
+script = ExtResource("1_frh8t")
+
+[node name="HealthComponent" parent="." instance=ExtResource("3_13did")]
+max_health = 100
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 3)
+shape = SubResource("CircleShape2D_rpmbu")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_bat2w")
+region_enabled = true
+region_rect = Rect2(0, 128, 16, 16)
+
+[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("7_wy6li")]
+visible = false
+collision_layer = 2
+collision_mask = 4
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+shape = SubResource("CircleShape2D_2geww")
+
+[node name="HitboxComponent" parent="." instance=ExtResource("5_qcf22")]
+visible = false
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+shape = SubResource("CircleShape2D_ceyae")
+debug_color = Color(0.254902, 0.631373, 0.196078, 0.419608)
+
+[node name="Axis" type="Node2D" parent="."]
+visible = false
+script = ExtResource("4_vhwjb")
+
+[node name="Reticle" type="Sprite2D" parent="Axis"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_bat2w")
+offset = Vector2(32, 0)
+region_enabled = true
+region_rect = Rect2(0, 80, 16, 16)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+limit_right = 2048
+limit_bottom = 2048
+
+[node name="ThrowingAxeComponent" parent="." instance=ExtResource("7_4xc1a")]

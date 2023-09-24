@@ -1,0 +1,60 @@
+[gd_scene load_steps=9 format=3 uid="uid://c8uug6extuab5"]
+
+[ext_resource type="Script" path="res://DEPRECIATED/Rat/Rat.gd" id="1_l1f37"]
+[ext_resource type="Texture2D" uid="uid://csnsbvvk2skt" path="res://Assets/Sprites/tilemap_packed.png" id="2_2mkn6"]
+[ext_resource type="PackedScene" uid="uid://di8riafuqjxhw" path="res://Scenes/Components/Health/HealthComponent.tscn" id="3_tp3oh"]
+[ext_resource type="PackedScene" uid="uid://ctb653eyuyi78" path="res://Scenes/Components/Hitbox/HitBoxComponent.tscn" id="4_641k7"]
+[ext_resource type="PackedScene" uid="uid://dwhirbiggc420" path="res://Scenes/Components/Hurtbox/HurtBoxComponent.tscn" id="5_d3jyk"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_42s0u"]
+radius = 8.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ykwnm"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yukog"]
+
+[node name="Rat" type="CharacterBody2D" groups=["enemy"]]
+z_index = 1
+collision_layer = 4
+collision_mask = 4
+motion_mode = 1
+platform_on_leave = 2
+platform_floor_layers = 4294901760
+script = ExtResource("1_l1f37")
+base = {
+"damage": 10,
+"health": 2,
+"knockback_resistance": 1.0,
+"speed": 1000
+}
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_2mkn6")
+region_enabled = true
+region_rect = Rect2(64, 160, 16, 16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_42s0u")
+
+[node name="HealthComponent" parent="." instance=ExtResource("3_tp3oh")]
+max_health = 4
+
+[node name="HitboxComponent" parent="." instance=ExtResource("4_641k7")]
+visible = false
+collision_layer = 4
+collision_mask = 2
+damage = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+shape = SubResource("CircleShape2D_ykwnm")
+debug_color = Color(1, 0, 0.109804, 0.419608)
+
+[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("5_d3jyk")]
+visible = false
+collision_layer = 4
+collision_mask = 2
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+shape = SubResource("CircleShape2D_yukog")
+debug_color = Color(0.215686, 0.639216, 0.0588235, 0.419608)

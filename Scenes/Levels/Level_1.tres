@@ -1,0 +1,76 @@
+[gd_resource type="Resource" script_class="LevelData" load_steps=4 format=3 uid="uid://bg0s1jvjv36q1"]
+
+[ext_resource type="Script" path="res://Scenes/Levels/LevelData.gd" id="1_55w3f"]
+[ext_resource type="Resource" uid="uid://blyy56cgap7af" path="res://Scenes/Mobs/Rat/Rat.tres" id="1_scg1v"]
+[ext_resource type="Resource" uid="uid://brdbpg4wb1col" path="res://Scenes/Mobs/Ghost/Ghost.tres" id="2_tapwq"]
+
+[resource]
+script = ExtResource("1_55w3f")
+monsters = {
+"ghost": ExtResource("2_tapwq"),
+"rat": ExtResource("1_scg1v")
+}
+waves = {
+"0000": {
+"bosses": {},
+"events": {},
+"health": 1.0,
+"interval": 1.0,
+"minimum": 15,
+"monsters": {
+"bat": 1.0
+},
+"scale": 1.0,
+"speed": 1.0
+},
+"0060": {
+"bosses": {},
+"events": {},
+"health": 1.0,
+"interval": 1.0,
+"minimum": 30,
+"monsters": {
+"bat": 0.75,
+"ghost": 0.25
+},
+"scale": 1.0,
+"speed": 1.0
+},
+"0120": {
+"bosses": {},
+"events": {},
+"health": 1.0,
+"interval": 1.0,
+"minimum": 45,
+"monsters": {
+"bat": 0.5,
+"ghost": 0.5
+},
+"scale": 1.0,
+"speed": 1.0
+},
+"0180": {
+"bosses": {},
+"events": {},
+"health": 1.0,
+"interval": 1.0,
+"minimum": 60,
+"monsters": {
+"bat": 1.0
+},
+"scale": 1.0,
+"speed": 1.0
+},
+"0240": {
+"bosses": {},
+"events": {},
+"health": 1.0,
+"interval": 1.0,
+"minimum": 90,
+"monsters": {
+"ghost": 1.0
+},
+"scale": 1.0,
+"speed": 1.0
+}
+}

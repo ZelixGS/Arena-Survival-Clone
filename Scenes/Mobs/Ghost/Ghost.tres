@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="EntityProperties" load_steps=3 format=3 uid="uid://brdbpg4wb1col"]
+
+[ext_resource type="Script" path="res://Scenes/Mobs/EntityProperties.gd" id="1_75k86"]
+[ext_resource type="Texture2D" uid="uid://dni5brqxetpa8" path="res://Scenes/Mobs/Ghost/Ghost.png" id="1_xthem"]
+
+[resource]
+script = ExtResource("1_75k86")
+mob_name = "Ghost"
+mob_sprite = ExtResource("1_xthem")
+color = Color(1, 1, 1, 0.74902)
+animation = "hover"
+damage = 10
+firerate = 1.0
+health = 20
+randomize_health = 1.2
+knockback_resistance = 0.8
+speed = 2200
+use_soft_collision = true
+soft_collision_force = 200.0
+layers_2d_physics = 2

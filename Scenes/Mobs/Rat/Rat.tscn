@@ -1,0 +1,51 @@
+[gd_scene load_steps=9 format=3 uid="uid://d0tei2yc0c8km"]
+
+[ext_resource type="Script" path="res://Scenes/Mobs/Entity.gd" id="1_gfybr"]
+[ext_resource type="PackedScene" uid="uid://di8riafuqjxhw" path="res://Scenes/Components/Health/HealthComponent.tscn" id="2_m6mp0"]
+[ext_resource type="Texture2D" uid="uid://csnsbvvk2skt" path="res://Assets/Sprites/tilemap_packed.png" id="3_mrjn3"]
+[ext_resource type="PackedScene" uid="uid://dwhirbiggc420" path="res://Scenes/Components/Hurtbox/HurtBoxComponent.tscn" id="4_056o5"]
+[ext_resource type="PackedScene" uid="uid://ctb653eyuyi78" path="res://Scenes/Components/Hitbox/HitBoxComponent.tscn" id="5_27w6d"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_31etl"]
+radius = 7.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0m7uy"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xxqpa"]
+
+[node name="Entity" type="CharacterBody2D"]
+collision_layer = 16
+collision_mask = 16
+motion_mode = 1
+script = ExtResource("1_gfybr")
+
+[node name="HealthComponent" parent="." instance=ExtResource("2_m6mp0")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_31etl")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("3_mrjn3")
+region_enabled = true
+region_rect = Rect2(48, 160, 16, 16)
+
+[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("4_056o5")]
+collision_layer = 4
+collision_mask = 2
+monitorable = true
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+shape = SubResource("CircleShape2D_0m7uy")
+debug_color = Color(1, 0, 0.137255, 0.419608)
+
+[node name="HitboxComponent" parent="." instance=ExtResource("5_27w6d")]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+shape = SubResource("CircleShape2D_xxqpa")
+debug_color = Color(0, 0.65098, 0.133333, 0.419608)
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true

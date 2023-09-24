@@ -1,0 +1,160 @@
+[gd_scene load_steps=13 format=3 uid="uid://d4fqagdd26iia"]
+
+[ext_resource type="Script" path="res://Scenes/Mobs/Entity.gd" id="1_as06c"]
+[ext_resource type="PackedScene" uid="uid://di8riafuqjxhw" path="res://Scenes/Components/Health/HealthComponent.tscn" id="2_1wpax"]
+[ext_resource type="PackedScene" uid="uid://dwhirbiggc420" path="res://Scenes/Components/Hurtbox/HurtBoxComponent.tscn" id="2_xntxk"]
+[ext_resource type="Texture2D" uid="uid://bgw87q3ldqql4" path="res://Scenes/Mobs/Rat/Rat.png" id="3_ju55o"]
+[ext_resource type="PackedScene" uid="uid://ctb653eyuyi78" path="res://Scenes/Components/Hitbox/HitBoxComponent.tscn" id="5_m577l"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_31etl"]
+radius = 7.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0m7uy"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xxqpa"]
+
+[sub_resource type="Animation" id="Animation_tly76"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_qyylv"]
+resource_name = "hover"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -5), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_6johg"]
+resource_name = "walk"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.174533, 0.0, -0.174533, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:scale")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.1, 1.1), Vector2(1, 1), Vector2(1.1, 1.1), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nt217"]
+_data = {
+"RESET": SubResource("Animation_tly76"),
+"hover": SubResource("Animation_qyylv"),
+"walk": SubResource("Animation_6johg")
+}
+
+[node name="Entity" type="CharacterBody2D" groups=["enemy"]]
+collision_layer = 16
+collision_mask = 16
+motion_mode = 1
+script = ExtResource("1_as06c")
+
+[node name="HealthComponent" parent="." instance=ExtResource("2_1wpax")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CircleShape2D_31etl")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("3_ju55o")
+region_rect = Rect2(48, 160, 16, 16)
+
+[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("2_xntxk")]
+visible = false
+collision_layer = 4
+collision_mask = 2
+monitorable = true
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+shape = SubResource("CircleShape2D_0m7uy")
+debug_color = Color(1, 0, 0.137255, 0.419608)
+
+[node name="HitboxComponent" parent="." instance=ExtResource("5_m577l")]
+visible = false
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+shape = SubResource("CircleShape2D_xxqpa")
+debug_color = Color(0, 0.65098, 0.133333, 0.419608)
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_nt217")
+}

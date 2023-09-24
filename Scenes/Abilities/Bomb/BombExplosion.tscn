@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://c6xfkobaeqi0b"]
+
+[ext_resource type="Script" path="res://Scenes/Abilities/Bomb/BombExplosion.gd" id="1_jyf34"]
+[ext_resource type="PackedScene" uid="uid://ctb653eyuyi78" path="res://Scenes/Components/Hitbox/HitBoxComponent.tscn" id="2_3uanx"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cutoe"]
+radius = 30.0
+
+[node name="BombExplosion" type="Node2D"]
+script = ExtResource("1_jyf34")
+
+[node name="HitboxComponent" parent="." instance=ExtResource("2_3uanx")]
+position = Vector2(-91.6202, -9.41669)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+position = Vector2(91.6202, 9.41669)
+shape = SubResource("CircleShape2D_cutoe")
+debug_color = Color(0.972549, 0.12549, 0.278431, 0.419608)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.2
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

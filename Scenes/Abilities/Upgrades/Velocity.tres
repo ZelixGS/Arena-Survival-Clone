@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="Upgrade" load_steps=2 format=3 uid="uid://bw0wugkj262sw"]
+
+[ext_resource type="Script" path="res://Scenes/Abilities/Upgrade.gd" id="1_d62qn"]
+
+[resource]
+script = ExtResource("1_d62qn")
+stat = "velocity"
+amount = 0.2

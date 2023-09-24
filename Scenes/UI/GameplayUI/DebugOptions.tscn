@@ -1,0 +1,133 @@
+[gd_scene load_steps=4 format=3 uid="uid://nyw78ltqjarw"]
+
+[ext_resource type="Script" path="res://Scenes/UI/Debug/Debug.gd" id="1_7roe8"]
+[ext_resource type="FontFile" uid="uid://dw7eg4kvq62cy" path="res://Assets/Fonts/Pixeltype.ttf" id="1_8mot4"]
+
+[sub_resource type="Theme" id="Theme_asp5i"]
+default_font = ExtResource("1_8mot4")
+default_font_size = 16
+
+[node name="DebugMenu" type="Panel"]
+process_mode = 3
+custom_minimum_size = Vector2(150, 120)
+script = ExtResource("1_7roe8")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer"]
+process_mode = 3
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/CenterContainer"]
+process_mode = 3
+layout_mode = 2
+columns = 2
+
+[node name="GodMode" type="Label" parent="MarginContainer/CenterContainer/GridContainer"]
+process_mode = 3
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_8mot4")
+text = "God Mode"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="God" type="CheckBox" parent="MarginContainer/CenterContainer/GridContainer"]
+unique_name_in_owner = true
+process_mode = 3
+layout_mode = 2
+
+[node name="DamageLabel" type="Label" parent="MarginContainer/CenterContainer/GridContainer"]
+process_mode = 3
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_8mot4")
+text = "Damage"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Damage" type="SpinBox" parent="MarginContainer/CenterContainer/GridContainer"]
+unique_name_in_owner = true
+process_mode = 3
+layout_mode = 2
+size_flags_horizontal = 3
+theme = SubResource("Theme_asp5i")
+step = 0.1
+value = 1.0
+update_on_text_changed = true
+
+[node name="ExperienceLabel" type="Label" parent="MarginContainer/CenterContainer/GridContainer"]
+process_mode = 3
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_8mot4")
+text = "Experience
+"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Experience" type="SpinBox" parent="MarginContainer/CenterContainer/GridContainer"]
+unique_name_in_owner = true
+process_mode = 3
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme = SubResource("Theme_asp5i")
+step = 0.1
+value = 1.0
+update_on_text_changed = true
+
+[node name="EnemySpawn" type="Label" parent="MarginContainer/CenterContainer/GridContainer"]
+process_mode = 3
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_8mot4")
+text = "Enemy Spawn Cap
+"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="SpawnCap" type="SpinBox" parent="MarginContainer/CenterContainer/GridContainer"]
+unique_name_in_owner = true
+process_mode = 3
+layout_mode = 2
+size_flags_horizontal = 3
+theme = SubResource("Theme_asp5i")
+max_value = 1000.0
+value = 300.0
+update_on_text_changed = true
+
+[node name="EnemiesPerWave" type="Label" parent="MarginContainer/CenterContainer/GridContainer"]
+process_mode = 3
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_8mot4")
+text = "Enemies Per Wave"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="PerWave" type="SpinBox" parent="MarginContainer/CenterContainer/GridContainer"]
+unique_name_in_owner = true
+process_mode = 3
+layout_mode = 2
+size_flags_horizontal = 3
+theme = SubResource("Theme_asp5i")
+value = 1.0
+update_on_text_changed = true
+
+[connection signal="toggled" from="MarginContainer/CenterContainer/GridContainer/God" to="." method="_on_god_toggled"]
+[connection signal="value_changed" from="MarginContainer/CenterContainer/GridContainer/Damage" to="." method="_on_damage_value_changed"]
+[connection signal="value_changed" from="MarginContainer/CenterContainer/GridContainer/Experience" to="." method="_on_experience_value_changed"]
+[connection signal="value_changed" from="MarginContainer/CenterContainer/GridContainer/SpawnCap" to="." method="_on_spawn_cap_value_changed"]
+[connection signal="value_changed" from="MarginContainer/CenterContainer/GridContainer/PerWave" to="." method="_on_per_wave_value_changed"]

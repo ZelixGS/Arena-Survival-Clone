@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://bre2iq5w6aqii"]
+
+[ext_resource type="Script" path="res://Scenes/Player/PlayerCamera.gd" id="1_s215u"]
+
+[node name="Camera2D" type="Camera2D"]
+limit_left = 0
+limit_top = 0
+limit_right = 2048
+limit_bottom = 2048
+position_smoothing_enabled = true
+script = ExtResource("1_s215u")

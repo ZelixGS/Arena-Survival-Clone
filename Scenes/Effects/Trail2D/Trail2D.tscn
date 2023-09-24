@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=3 uid="uid://cnfmd31w7sfhv"]
+
+[sub_resource type="Curve" id="Curve_0np8h"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+metadata/_snap_enabled = true
+
+[sub_resource type="GDScript" id="GDScript_x4d2j"]
+script/source = "extends Line2D
+class_name Trail2D
+
+var queue: Array
+@export var MAX_LENGTH: int
+
+func _process(_delta: float) -> void:
+	queue.push_front(owner.position)
+	
+	if queue.size() > MAX_LENGTH:
+		queue.pop_back()
+	
+	clear_points()
+	
+	for point in queue:
+		add_point(point)
+"
+
+[node name="Trail2D" type="Line2D"]
+show_behind_parent = true
+top_level = true
+width_curve = SubResource("Curve_0np8h")
+default_color = Color(1, 1, 1, 0.74902)
+script = SubResource("GDScript_x4d2j")

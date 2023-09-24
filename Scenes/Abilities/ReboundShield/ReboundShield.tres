@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="AbilityProperties" load_steps=2 format=3 uid="uid://cy8c41ouloliv"]
+
+[ext_resource type="Script" path="res://Scenes/Abilities/AbilityProperties.gd" id="1_ihktn"]
+
+[resource]
+script = ExtResource("1_ihktn")
+damage = 20
+damage_mod = 1.0
+damage_range = 0.2
+critical_chance = 5.0
+critical_amplifier = 2.0
+projectiles = 1
+cooldown = 2.5
+delay = 0.1
+velocity = 160.0
+size = 1.0
+bounces = 100
+penetration = 0
+knockback = 1.0
+duration = -1.0

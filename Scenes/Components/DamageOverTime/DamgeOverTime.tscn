@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://bpao04m42gqbs"]
+
+[ext_resource type="Script" path="res://Scenes/Abilities/DamgeOverTime.gd" id="1_f35s6"]
+
+[node name="DamgeOverTimeComponent" type="Node"]
+script = ExtResource("1_f35s6")
+
+[node name="Tick" type="Timer" parent="."]
+autostart = true
+
+[node name="Duration" type="Timer" parent="."]
+
+[connection signal="timeout" from="Tick" to="." method="_on_tick_timeout"]
+[connection signal="timeout" from="Duration" to="." method="_on_duration_timeout"]

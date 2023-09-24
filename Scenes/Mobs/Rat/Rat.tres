@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="EntityProperties" load_steps=3 format=3 uid="uid://blyy56cgap7af"]
+
+[ext_resource type="Script" path="res://Scenes/Mobs/EntityProperties.gd" id="1_0gwc3"]
+[ext_resource type="Texture2D" uid="uid://bgw87q3ldqql4" path="res://Scenes/Mobs/Rat/Rat.png" id="1_ads1f"]
+
+[resource]
+script = ExtResource("1_0gwc3")
+mob_name = "Rat"
+mob_sprite = ExtResource("1_ads1f")
+color = Color(1, 1, 1, 1)
+animation = "walk"
+damage = 10
+firerate = 1.0
+health = 10
+randomize_health = 1.2
+knockback_resistance = 1.0
+speed = 1600
+use_soft_collision = true
+soft_collision_force = 400.0
+layers_2d_physics = 4

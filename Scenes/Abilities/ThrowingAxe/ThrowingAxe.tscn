@@ -1,0 +1,76 @@
+[gd_scene load_steps=9 format=3 uid="uid://c62yh3k830a5q"]
+
+[ext_resource type="Script" path="res://Scenes/Abilities/ThrowingAxe/ThrowAxe.gd" id="1_5au4b"]
+[ext_resource type="Texture2D" uid="uid://csnsbvvk2skt" path="res://Assets/Sprites/tilemap_packed.png" id="2_aowh0"]
+[ext_resource type="PackedScene" uid="uid://ctb653eyuyi78" path="res://Scenes/Components/Hitbox/HitBoxComponent.tscn" id="3_0i8cm"]
+[ext_resource type="PackedScene" uid="uid://cnfmd31w7sfhv" path="res://Scenes/Effects/Trail2D/Trail2D.tscn" id="4_ejgf7"]
+
+[sub_resource type="Animation" id="Animation_xyllm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_qh8rq"]
+resource_name = "spin"
+length = 0.4
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -0.785398, -1.5708, -2.35619, -3.14159, -3.92699, -4.71239, -5.49779, -6.28319]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8lvd3"]
+_data = {
+"RESET": SubResource("Animation_xyllm"),
+"spin": SubResource("Animation_qh8rq")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_52e4c"]
+radius = 8.0
+
+[node name="ThrowingAxe" type="Node2D"]
+z_index = 4
+script = ExtResource("1_5au4b")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_aowh0")
+region_enabled = true
+region_rect = Rect2(176, 144, 16, 16)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "spin"
+libraries = {
+"": SubResource("AnimationLibrary_8lvd3")
+}
+
+[node name="HitboxComponent" parent="." instance=ExtResource("3_0i8cm")]
+collision_layer = 2
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+shape = SubResource("CircleShape2D_52e4c")
+
+[node name="Trail2D" parent="." instance=ExtResource("4_ejgf7")]
+y_sort_enabled = true
+MAX_LENGTH = 120
+
+[connection signal="struck" from="HitboxComponent" to="." method="_on_struck"]

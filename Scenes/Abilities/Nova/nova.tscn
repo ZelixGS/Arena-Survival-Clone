@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://bgsvwk8t2vyv"]
+
+[ext_resource type="Script" path="res://Singletons/NovaTest.gd" id="1_n5glq"]
+[ext_resource type="PackedScene" uid="uid://ctb653eyuyi78" path="res://Scenes/Components/Hitbox/HitBoxComponent.tscn" id="2_3a8t7"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_n7tvd"]
+
+[node name="Nova" type="Node2D"]
+script = ExtResource("1_n5glq")
+
+[node name="HitboxComponent" parent="." instance=ExtResource("2_3a8t7")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+shape = SubResource("CircleShape2D_n7tvd")

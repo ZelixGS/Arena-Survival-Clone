@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dexqc4na4bgca"]
+
+[ext_resource type="Script" path="res://Scenes/Abilities/Bomb/Sharpnel.gd" id="1_3q2xf"]
+
+[node name="Sharpnel" type="Node"]
+script = ExtResource("1_3q2xf")

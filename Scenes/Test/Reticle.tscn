@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cak77apxjk8kc"]
+
+[ext_resource type="Texture2D" uid="uid://csnsbvvk2skt" path="res://Assets/Sprites/tilemap_packed.png" id="1_jcofi"]
+
+[node name="Reticle" type="Sprite2D"]
+texture = ExtResource("1_jcofi")
+region_enabled = true
+region_rect = Rect2(0, 80, 16, 16)

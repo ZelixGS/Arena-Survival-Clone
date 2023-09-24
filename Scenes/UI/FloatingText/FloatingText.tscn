@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://du0j0f183c61b"]
+
+[ext_resource type="FontFile" uid="uid://dw7eg4kvq62cy" path="res://Assets/Fonts/Pixeltype.ttf" id="1_1f6cs"]
+[ext_resource type="Script" path="res://Scenes/UI/FloatingText/FloatingText.gd" id="1_2stas"]
+
+[node name="FloatingText" type="Label"]
+z_index = 10
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("1_1f6cs")
+text = "58"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("1_2stas")

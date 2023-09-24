@@ -1,0 +1,56 @@
+[gd_scene load_steps=6 format=3 uid="uid://cmcr6mw5gdu8i"]
+
+[ext_resource type="Script" path="res://Scenes/Abilities/Bomb/Bomb.gd" id="1_a4mou"]
+[ext_resource type="Texture2D" uid="uid://cpjhi5hxn7re1" path="res://Assets/Sprites/tilemap_packed2.png" id="2_khp0p"]
+
+[sub_resource type="Animation" id="Animation_55tcm"]
+resource_name = "spin"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.28319]
+}
+
+[sub_resource type="Animation" id="Animation_i5wg4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1vwrr"]
+_data = {
+"RESET": SubResource("Animation_i5wg4"),
+"spin": SubResource("Animation_55tcm")
+}
+
+[node name="Bomb" type="Node2D"]
+script = ExtResource("1_a4mou")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_khp0p")
+region_enabled = true
+region_rect = Rect2(144, 128, 16, 16)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "spin"
+libraries = {
+"": SubResource("AnimationLibrary_1vwrr")
+}

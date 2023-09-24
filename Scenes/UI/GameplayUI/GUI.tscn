@@ -1,0 +1,278 @@
+[gd_scene load_steps=10 format=3 uid="uid://u82qjqe4pdog"]
+
+[ext_resource type="Script" path="res://Scenes/UI/GameplayUI/ExperienceBar.gd" id="1_pwumv"]
+[ext_resource type="Script" path="res://Scenes/UI/GameplayUI/Master.gd" id="1_ujebw"]
+[ext_resource type="FontFile" uid="uid://dw7eg4kvq62cy" path="res://Assets/Fonts/Pixeltype.ttf" id="3_5rbao"]
+[ext_resource type="PackedScene" uid="uid://d3r8med1abeyc" path="res://Scenes/UI/GameplayUI/DebugDisplay.tscn" id="3_53o0a"]
+[ext_resource type="PackedScene" uid="uid://nyw78ltqjarw" path="res://Scenes/UI/GameplayUI/DebugOptions.tscn" id="3_uxpyo"]
+[ext_resource type="Script" path="res://Scenes/UI/GameplayUI/HealthBar.gd" id="5_201c5"]
+[ext_resource type="Script" path="res://Scenes/UI/GameplayUI/Timer.gd" id="6_wsggv"]
+
+[sub_resource type="Gradient" id="Gradient_nuaqq"]
+colors = PackedColorArray(0, 0, 0, 0.74902, 0, 0, 0, 0.74902)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ygugo"]
+gradient = SubResource("Gradient_nuaqq")
+
+[node name="GUI" type="CanvasLayer"]
+process_mode = 3
+
+[node name="Master" type="Control" parent="."]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ujebw")
+
+[node name="PauseMenu" type="Control" parent="Master"]
+process_mode = 3
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="Master/PauseMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("GradientTexture1D_ygugo")
+
+[node name="DebugMenu" parent="Master/PauseMenu" instance=ExtResource("3_uxpyo")]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -150.0
+offset_bottom = 120.0
+grow_horizontal = 0
+
+[node name="Paused" type="Label" parent="Master/PauseMenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -24.5
+offset_top = -15.5
+offset_right = 24.5
+offset_bottom = 15.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_5rbao")
+theme_override_font_sizes/font_size = 32
+text = "Paused"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Master/PauseMenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -82.5
+offset_top = 20.0
+offset_right = 81.5
+offset_bottom = 60.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Continue" type="Button" parent="Master/PauseMenu/HBoxContainer"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_5rbao")
+text = "Continue"
+
+[node name="Quit" type="Button" parent="Master/PauseMenu/HBoxContainer"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_5rbao")
+text = "Quit"
+
+[node name="GameUI" type="Control" parent="Master"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="ExperienceBar" type="HBoxContainer" parent="Master/GameUI"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -240.0
+offset_top = -18.0
+offset_right = 240.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+theme_override_constants/separation = 0
+alignment = 1
+script = ExtResource("1_pwumv")
+
+[node name="Panel" type="Panel" parent="Master/GameUI/ExperienceBar"]
+custom_minimum_size = Vector2(35, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Master/GameUI/ExperienceBar/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_5rbao")
+text = "1
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="Master/GameUI/ExperienceBar"]
+modulate = Color(1, 0, 0.611765, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_fonts/font = ExtResource("3_5rbao")
+max_value = 5.0
+show_percentage = false
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Master/GameUI"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 40.0
+grow_horizontal = 2
+
+[node name="HealthBar" type="HBoxContainer" parent="Master/GameUI/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+alignment = 1
+script = ExtResource("5_201c5")
+
+[node name="Panel" type="Panel" parent="Master/GameUI/VBoxContainer/HealthBar"]
+custom_minimum_size = Vector2(35, 20)
+layout_mode = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="Master/GameUI/VBoxContainer/HealthBar/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Master/GameUI/VBoxContainer/HealthBar/Panel/CenterContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_5rbao")
+text = "HP"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="Master/GameUI/VBoxContainer/HealthBar"]
+modulate = Color(1, 0, 0, 1)
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_fonts/font = ExtResource("3_5rbao")
+value = 100.0
+show_percentage = false
+
+[node name="Timer" type="Label" parent="Master/GameUI/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("3_5rbao")
+theme_override_font_sizes/font_size = 32
+text = "00: 00"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("6_wsggv")
+
+[node name="DebugDisplay" parent="Master/GameUI" instance=ExtResource("3_53o0a")]
+layout_mode = 0
+
+[node name="Death" type="Control" parent="Master"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="Master/Death"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("GradientTexture1D_ygugo")
+
+[node name="Dead" type="Label" parent="Master/Death"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -24.5
+offset_top = -15.5
+offset_right = 24.5
+offset_bottom = 15.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_5rbao")
+theme_override_font_sizes/font_size = 32
+text = "You've died..."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Master/Death"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -82.5
+offset_top = 20.0
+offset_right = 81.5
+offset_bottom = 60.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Quit" type="Button" parent="Master/Death/HBoxContainer"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_5rbao")
+text = "Quit"
+
+[connection signal="pressed" from="Master/PauseMenu/HBoxContainer/Continue" to="Master" method="_on_continue_pressed"]
+[connection signal="pressed" from="Master/PauseMenu/HBoxContainer/Quit" to="Master" method="_on_quit_pressed"]
+[connection signal="pressed" from="Master/Death/HBoxContainer/Quit" to="Master" method="_on_quit_pressed"]
