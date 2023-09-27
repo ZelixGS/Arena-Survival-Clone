@@ -1,5 +1,5 @@
 extends Resource
-class_name LevelData
+class_name WaveData
 
 @export var monsters: Dictionary = {
 	"rat": preload("res://Scenes/Mobs/Rat/Rat.tres"),

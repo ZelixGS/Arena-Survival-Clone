@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Utsu Survivors"
-run/main_scene="res://Scenes/Levels/LevelOne.tscn"
+run/main_scene="res://Scenes/Levels/Stage.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -26,10 +26,6 @@ Clock="*res://Singletons/Clock.gd"
 
 [display]
 
-window/size/viewport_width=640
-window/size/viewport_height=352
-window/size/window_width_override=1280
-window/size/window_height_override=704
 window/stretch/mode="viewport"
 window/vsync/vsync_mode=0
 

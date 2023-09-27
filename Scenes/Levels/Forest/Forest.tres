@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="LevelData" load_steps=4 format=3 uid="uid://bg0s1jvjv36q1"]
 
-[ext_resource type="Script" path="res://Scenes/Levels/LevelData.gd" id="1_55w3f"]
+[ext_resource type="Script" path="res://Scenes/Levels/WaveData.gd" id="1_55w3f"]
 [ext_resource type="Resource" uid="uid://blyy56cgap7af" path="res://Scenes/Mobs/Rat/Rat.tres" id="1_scg1v"]
 [ext_resource type="Resource" uid="uid://brdbpg4wb1col" path="res://Scenes/Mobs/Ghost/Ghost.tres" id="2_tapwq"]
 

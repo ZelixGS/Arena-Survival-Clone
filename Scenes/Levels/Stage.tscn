@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://cjr7tdff8je4n"]
+
+[ext_resource type="PackedScene" uid="uid://u82qjqe4pdog" path="res://Scenes/UI/GameplayUI/GUI.tscn" id="1_oway4"]
+[ext_resource type="PackedScene" uid="uid://o4ygbfjpl4km" path="res://Scenes/Managers/SpawnManager.tscn" id="1_qy7ma"]
+[ext_resource type="PackedScene" uid="uid://bsslsan1xsud7" path="res://Scenes/Levels/Forest/Forest.tscn" id="3_cpdck"]
+
+[node name="Stage" type="Node"]
+
+[node name="SpawnManager" parent="." instance=ExtResource("1_qy7ma")]
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+custom_minimum_size = Vector2(1920, 1080)
+offset_right = 1920.0
+offset_bottom = 1080.0
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
+snap_2d_transforms_to_pixel = true
+snap_2d_vertices_to_pixel = true
+canvas_item_default_texture_filter = 0
+size = Vector2i(1920, 1080)
+size_2d_override = Vector2i(640, 352)
+size_2d_override_stretch = true
+render_target_update_mode = 4
+
+[node name="Forest" parent="SubViewportContainer/SubViewport" instance=ExtResource("3_cpdck")]
+
+[node name="GUI" parent="." instance=ExtResource("1_oway4")]

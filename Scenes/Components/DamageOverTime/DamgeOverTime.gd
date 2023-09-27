@@ -1,29 +1,21 @@
-extends Node
-class_name DamageOverTime
+class_name DamageOverTime extends Node
 
-var args: Dictionary = {}
-
-@export var total_damage: float = 40
-@export var duration_time: float = 5
-@export var tick_rate: float = 0.5
+var total_damage: int = 40
+var duration_time: float = 5
+var tick_rate: float = 0.5
 
 var damage: int = 0
 var health_component: HealthComponent
 
-func _ready() -> void:
-	if not health_component:
-		queue_free()
-	
-	if args.has("total_damage"):
-		total_damage = args["total_damage"]
-		
-	if args.has("duration_time"):
-		total_damage = args["duration_time"]
-		
-	if args.has("tick_rate"):
-		total_damage = args["tick_rate"]
-		
+func _init(total: int, dur: float, rate: float) -> void:
+	total_damage = total
+	duration_time = dur
+	tick_rate = rate
 	damage = ceili(total_damage / (duration_time/tick_rate))
+
+func _ready() -> void:
+	if not get_parent() is HealthComponent:
+		queue_free()
 	
 	var tick: Timer = Timer.new()
 	tick.one_shot = false
@@ -38,7 +30,8 @@ func _ready() -> void:
 	duration.start(duration_time)
 
 func _on_tick_timeout() -> void:
-	health_component.damage(damage)
+	print("tick %s" % damage)
+	get_parent().damage(damage)
 
 func _on_duration_timeout() -> void:
 	finished()

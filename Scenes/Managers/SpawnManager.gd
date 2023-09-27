@@ -9,7 +9,7 @@ var placeholder_mob: EntityProperties = preload("res://Scenes/Mobs/Rat/Rat.tres"
 @onready var player: Player = G.get_player()
 @onready var stage: Node = get_tree().get_first_node_in_group("enemy_container")
 
-@export var level_data: LevelData = LevelData.new()
+@export var level_data: WaveData = WaveData.new()
 
 var cached_wave = {}
 var current_key: String = ""

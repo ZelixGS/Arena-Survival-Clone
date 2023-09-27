@@ -1,5 +1,7 @@
 extends Node
 
+enum Damage {PHYSICAL, MAGICAL, FIRE, FROST, ELECTRICAL, ACID, HOLY, DARK }
+
 func get_player() -> Player:
 	return get_tree().get_first_node_in_group("player")
 
@@ -12,6 +14,7 @@ func get_player_position() -> Vector2:
 func get_stage() -> Node2D:
 	return get_tree().get_first_node_in_group("stage")
 
+#  Expensive, might need to move into C# if called enough.
 func get_closest_enemies(pos: Vector2, max_range: float = 0, exclude: Array = []) -> Array:
 	var enemies: Array[Node] = get_tree().get_nodes_in_group("enemy")
 	if max_range > 0:
@@ -35,16 +38,18 @@ func get_closest_enemies(pos: Vector2, max_range: float = 0, exclude: Array = []
 	return enemies
 
 func index_exists(array: Array, index: int) -> bool:
-	return index >= 0 and index < array.size() 
+	return index >= 0 and index < array.size()
 
-func get_snapped_angle(value: int, steps:int, pos: Vector2, radius: float) -> Vector2:
-	var snap = 2 * PI / steps
-	return pos + Vector2(radius, 0).rotated(snap * value)
+# Helper functions to get an orthogonal angel
+func get_orthogonal_angle(value: int, steps:int = 8) -> Vector2:
+	return Vector2.ZERO.rotated((2 * PI / steps) * value)
+	
+func get_random_orthogonal_angle(max_range: int, steps:int = 8) -> Vector2:
+	return get_orthogonal_angle(randi_range(1, max_range), steps)
 
-func calculate_damage(value: int) -> int:
-	return floor(randf_range(value * 0.8, value * 1.2))
 
-func random_from_table(input: Array) -> Variant:
+# Expensive Call, but a fall back for one off Random Tables
+func get_random_from_table(input: Array) -> Variant:
 	var total_weight: float = 0
 	var cumulative: Array = []
 

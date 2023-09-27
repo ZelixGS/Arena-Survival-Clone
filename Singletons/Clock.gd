@@ -14,6 +14,6 @@ func _process(delta: float) -> void:
 		time = 0
 		
 func _seconds_to_clock() -> Dictionary:
-	var _minutes: int = floor(seconds / 60)
+	var _minutes: int = floor(seconds / 60.0)
 	var _seconds: int = seconds - (_minutes * 60)
 	return {"minutes": _minutes, "seconds": _seconds}
