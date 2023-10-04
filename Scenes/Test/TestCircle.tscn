@@ -1,24 +1,25 @@
-[gd_scene load_steps=3 format=3 uid="uid://cs212i7pi0uu4"]
+[gd_scene load_steps=5 format=3 uid="uid://cs212i7pi0uu4"]
 
-[ext_resource type="Script" path="res://Scenes/Test/TestCircle.gd" id="1_kbfvl"]
-[ext_resource type="Texture2D" uid="uid://csnsbvvk2skt" path="res://Assets/Sprites/tilemap_packed.png" id="2_y1rdr"]
+[ext_resource type="Script" path="res://Scenes/Test/CharacterBody2D.gd" id="2_vof2j"]
+[ext_resource type="Texture2D" uid="uid://bk42tahgr5nve" path="res://Scenes/Mobs/Wizard.png" id="3_kilsf"]
+[ext_resource type="PackedScene" uid="uid://d0cs8e8rjs441" path="res://Scenes/Player/Player.tscn" id="4_mtcp5"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_oydwp"]
 
 [node name="TestCircle" type="Node2D"]
-script = ExtResource("1_kbfvl")
 
-[node name="HSlider" type="SpinBox" parent="."]
-offset_left = 90.0
-offset_top = -88.0
-offset_right = 190.0
-offset_bottom = -57.0
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+position = Vector2(528, -485)
+motion_mode = 1
+script = ExtResource("2_vof2j")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_y1rdr")
-region_enabled = true
-region_rect = Rect2(0, 112, 16, 16)
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+texture = ExtResource("3_kilsf")
 
-[node name="Children" type="Node2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(-528, 485)
+shape = SubResource("CircleShape2D_oydwp")
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Player" parent="." instance=ExtResource("4_mtcp5")]
 
-[connection signal="value_changed" from="HSlider" to="." method="_on_h_slider_value_changed"]
+[node name="Camera2D" type="Camera2D" parent="Player"]

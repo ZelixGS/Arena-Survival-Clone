@@ -1,9 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://dcn4a4uwxpqfm"]
+[gd_scene load_steps=6 format=3 uid="uid://dcn4a4uwxpqfm"]
 
 [ext_resource type="Script" path="res://Scenes/Abilities/ReboundShield/Projectile/ReboundShield.gd" id="1_6fhfv"]
 [ext_resource type="Texture2D" uid="uid://csnsbvvk2skt" path="res://Assets/Sprites/tilemap_packed.png" id="2_34l5y"]
 [ext_resource type="PackedScene" uid="uid://cnfmd31w7sfhv" path="res://Scenes/Effects/Trail2D/Trail2D.tscn" id="3_bmetu"]
-[ext_resource type="PackedScene" uid="uid://ctb653eyuyi78" path="res://Scenes/Components/Hitbox/HitBoxComponent.tscn" id="4_bqce0"]
 
 [sub_resource type="Gradient" id="Gradient_6u8v1"]
 colors = PackedColorArray(0.892459, 0.728368, 0.0315634, 1, 1, 1, 1, 0)
@@ -11,7 +10,10 @@ colors = PackedColorArray(0.892459, 0.728368, 0.0315634, 1, 1, 1, 1, 0)
 [sub_resource type="CircleShape2D" id="CircleShape2D_koyjj"]
 radius = 7.0
 
-[node name="ShieldToss" type="Node2D"]
+[node name="ShieldToss" type="Area2D"]
+collision_layer = 8
+collision_mask = 0
+monitoring = false
 script = ExtResource("1_6fhfv")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -26,11 +28,5 @@ width = 8.0
 gradient = SubResource("Gradient_6u8v1")
 MAX_LENGTH = 240
 
-[node name="HitboxComponent" parent="." instance=ExtResource("4_bqce0")]
-collision_layer = 2
-collision_mask = 4
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_koyjj")
-
-[connection signal="struck" from="HitboxComponent" to="." method="_on_hitbox_component_struck"]

@@ -1,11 +1,7 @@
-extends Area2D
-class_name HitboxComponent
+class_name HitboxComponent extends Area2D
 
-signal struck
+signal strike(node: Node2D)
 
-@export var damage = 0
-@export var critical: bool = false
-
-func _on_area_entered(area: Area2D) -> void:
-	if area is HurtboxComponent:
-		emit_signal("struck", area)
+var damage: int = 0
+var crit_amp: float = 1.0
+var type: G.Damage = G.Damage.PHYSICAL

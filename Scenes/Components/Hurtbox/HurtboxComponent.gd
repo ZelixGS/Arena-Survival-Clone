@@ -1,5 +1,4 @@
-extends Area2D
-class_name HurtboxComponent
+class_name HurtboxComponent extends Area2D
 
 @export var health_component: HealthComponent
 
@@ -10,10 +9,9 @@ func on_entered(area: Area2D) -> void:
 	if not area is HitboxComponent:
 		return
 	
-	area.struck.emit(self)
-	
 	if not health_component:
 		return
 
 	var hit = area as HitboxComponent
-	health_component.damage(hit.damage)
+	health_component.change_health(hit.damage, hit.crit_amp, hit.type)
+	hit.emit_signal("strike", owner)

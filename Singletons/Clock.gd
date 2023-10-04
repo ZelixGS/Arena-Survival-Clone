@@ -3,10 +3,12 @@ extends Node
 const TIME_PERIOD: float = 1 # 1000ms
 
 var time: float = 0
+var normal_time: float = 0
 var rate: float = 1.0
 var seconds: int = 0
 
 func _process(delta: float) -> void:
+	normal_time += delta
 	time += delta * rate
 	if time > TIME_PERIOD:
 		seconds += 1

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Upgrade" load_steps=2 format=3 uid="uid://cxdqrqk7kqcoj"]
+
+[ext_resource type="Script" path="res://Scenes/Abilities/Upgrade.gd" id="1_ww150"]
+
+[resource]
+script = ExtResource("1_ww150")
+name = "Ruby Ring"
+desc = null
+type = null
+stat = null
+amount = 1.2
+calculation = null

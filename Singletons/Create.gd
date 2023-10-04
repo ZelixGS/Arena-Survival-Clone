@@ -2,12 +2,23 @@ extends Node
 
 @onready var floating_text_scene: PackedScene = preload("res://Scenes/UI/FloatingText/FloatingText.tscn")
 
+func add_to_node(target: Node, obj: Node) -> void:
+	target.call_deferred("add_child", obj)
+
+func add_to_world(obj: Node) -> void:
+	G.get_stage().call_deferred("add_child", obj)
+
+func node(res: Resource, spawn: Transform2D) -> void:
+	var _node: Node2D = res.instantiate()
+	_node.global_position = spawn.get_origin()
+	add_to_world(_node)
+
 func projectile(res: Resource, spawn: Transform2D, properties: AbilityProperties) -> void:
 	var p: Projectile = res.instantiate()
 	p.properties = properties
 	p.position = spawn.get_origin()
 	p.rotation = spawn.get_rotation()
-	G.get_stage().call_deferred("add_child", p)
+	add_to_world(p)
 
 func damage_over_time(res: Resource, target: CharacterBody2D, args: Dictionary = {}):
 	var dot = res.instantiate()
@@ -24,7 +35,7 @@ func particle(res: Resource, target) -> void:
 	if target is Node2D:
 		target.add_child(p)
 	
-func floating_text(value: String, spawn: Transform2D, duration: float = 0.2, critical: bool = false, travel: Vector2 = Vector2.UP, spread: float = 45.0) -> void:
+func floating_text(value: String, spawn: Transform2D, critical: bool = false, duration: float = 0.2, travel: Vector2 = Vector2.UP, spread: float = 45.0) -> void:
 	var text: FloatingText = floating_text_scene.instantiate()
 	text.position = spawn.get_origin()
 #	text.position += travel * 8 # Offset by 8px

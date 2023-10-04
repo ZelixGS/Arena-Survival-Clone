@@ -1,32 +1,57 @@
-extends Node2D
-class_name Projectile
+class_name Projectile extends HitboxComponent
 
-var properties: AbilityProperties = AbilityProperties.new()
-@onready var hitbox_component: HitboxComponent = $HitboxComponent
+signal expired
+
+var properties: AbilityProperties
+var stop_movement: bool = false
+
+@onready var collision_shape_2d: CollisionShape2D = get_node_or_null("CollisionShape2D")
+@onready var sprite_2d: Sprite2D = get_node_or_null("Sprite2D")
+@onready var timer: Timer = get_node_or_null("Timer")
 
 func _ready() -> void:
 	setup()
 
 func setup() -> void:
-	# Modify Size
-	scale *= properties.size
-
-	# Randomize Damage and apply to Hitbox.
-	# First Index returns int of Damage
-	# Second Index returns bool if Critical
-	var damage = properties.roll_damage()
-	hitbox_component.damage = damage[0]
-	hitbox_component.critical = damage[1]
-
-	if properties.duration > 0:
-		var timer: Timer = Timer.new()
-		timer.one_shot = true
-		timer.connect("timeout", despawn)
-		add_child(timer)
+	calculate_damage()
+	connect("strike", _on_strike)
+#	scale *= properties.size
+	if timer and properties.duration > 0:
 		timer.start(properties.duration)
+
+func calculate_damage():
+	damage = properties.roll_damage()
+	type = properties.type
+	if properties.is_critical():
+		damage *= floor(properties.critical_amplifier)
+		crit_amp = properties.critical_amplifier
+	else:
+		crit_amp = 1.0
+	
+func _on_strike(node: Node2D):
+	var crit: bool = true if crit_amp > 1 else false
+	Create.floating_text(str(damage), node.get_global_transform(), crit)
+	Events.emit_signal("ui_damage_meter", properties.ability_name, damage,  crit)
+	Events.emit_signal("proc_on_hit")
+	if crit:
+		Events.emit_signal("proc_on_crit")
+	calculate_damage()
 
 func move_projectile(delta: float) -> void:
 	position += (transform.x * properties.velocity) * delta
 
 func despawn() -> void:
+	emit_signal("expired")
 	call_deferred("queue_free")
+
+func fade_out() -> void:
+	stop_movement = true
+#	if collision_shape_2d:
+#		collision_shape_2d.set_deferred("disabled", true)
+	if sprite_2d:
+		var tween: Tween = create_tween().set_trans(Tween.TRANS_LINEAR)
+		tween.tween_property(sprite_2d, "modulate:a", 0, 0.2)
+		tween.tween_callback(despawn)
+	else:
+		await get_tree().create_timer(0.2).timeout
+		despawn()

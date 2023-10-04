@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://cuv3u4rpmo5en"]
+
+[ext_resource type="Script" path="res://Scenes/UI/Inventory/StatPanel/Statblock.gd" id="1_46gug"]
+[ext_resource type="FontFile" uid="uid://dw7eg4kvq62cy" path="res://Assets/Fonts/Pixeltype.ttf" id="2_vnaei"]
+
+[node name="HBoxContainer" type="HBoxContainer"]
+alignment = 1
+script = ExtResource("1_46gug")
+
+[node name="StatName" type="Label" parent="."]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_vnaei")
+theme_override_font_sizes/font_size = 32
+text = "Damage"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="StatAmount" type="Label" parent="."]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_vnaei")
+theme_override_font_sizes/font_size = 32
+text = "100.00%"
+horizontal_alignment = 2
+vertical_alignment = 1

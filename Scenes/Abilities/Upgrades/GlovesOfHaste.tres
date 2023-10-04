@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Upgrade" load_steps=3 format=3 uid="uid://dukkem4alk62s"]
+
+[ext_resource type="Script" path="res://Scenes/Abilities/Upgrade.gd" id="1_3jrcy"]
+[ext_resource type="Texture2D" uid="uid://bkf0k6c1h4poy" path="res://icon.svg" id="1_6yvt2"]
+
+[resource]
+script = ExtResource("1_3jrcy")
+name = "Gloves of Haste"
+icon = ExtResource("1_6yvt2")
+stat = "cooldown"
+amount = 1.2
+type = null
+desc = null

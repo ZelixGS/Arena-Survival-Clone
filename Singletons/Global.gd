@@ -1,6 +1,7 @@
 extends Node
 
-enum Damage {PHYSICAL, MAGICAL, FIRE, FROST, ELECTRICAL, ACID, HOLY, DARK }
+enum Damage { PHYSICAL, MAGICAL, FIRE, FROST, ELECTRICAL, ACID, HOLY, DARK, HEAL }
+enum Activation { TIMER, PROC_HIT, PROC_CRIT }
 
 func get_player() -> Player:
 	return get_tree().get_first_node_in_group("player")
@@ -47,6 +48,9 @@ func get_orthogonal_angle(value: int, steps:int = 8) -> Vector2:
 func get_random_orthogonal_angle(max_range: int, steps:int = 8) -> Vector2:
 	return get_orthogonal_angle(randi_range(1, max_range), steps)
 
+func to_percent(value: float) -> String:
+	value = value - 1 if value > 1.0 else value
+	return "%.2f%%" % ((value)*100)
 
 # Expensive Call, but a fall back for one off Random Tables
 func get_random_from_table(input: Array) -> Variant:

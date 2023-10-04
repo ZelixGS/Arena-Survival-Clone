@@ -4,17 +4,21 @@
 
 [resource]
 script = ExtResource("1_ihktn")
-damage = 20
-damage_mod = 1.0
-damage_range = 0.2
+ability_name = "Rebound Shield"
+activation = 0
+amount = 10
+modifier = 1.0
+variance = 0.2
 critical_chance = 5.0
 critical_amplifier = 2.0
-projectiles = 1
-cooldown = 2.5
-delay = 0.1
+type = 0
 velocity = 160.0
+cooldown = 2.5
 size = 1.0
-bounces = 100
+projectiles = 1
+delay = 0.1
+bounces = 1
 penetration = 0
 knockback = 1.0
 duration = -1.0
+proc_chance = 0.0

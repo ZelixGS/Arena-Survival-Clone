@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Upgrade" load_steps=2 format=3 uid="uid://dpvoa1b1crc1e"]
+
+[ext_resource type="Script" path="res://Scenes/Abilities/Upgrade.gd" id="1_n1wh7"]
+
+[resource]
+script = ExtResource("1_n1wh7")
+name = ""
+stat = "damage"
+amount = 1.0
+type = 1
+desc = "Increases [$s] by [$v]."

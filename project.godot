@@ -26,6 +26,8 @@ Clock="*res://Singletons/Clock.gd"
 
 [display]
 
+window/size/viewport_width=1920
+window/size/viewport_height=1080
 window/stretch/mode="viewport"
 window/vsync/vsync_mode=0
 
@@ -100,7 +102,8 @@ menu={
 2d_physics/layer_1="Enviroment"
 2d_physics/layer_2="Player"
 2d_physics/layer_3="Enemy"
-2d_physics/layer_4="Pickup"
+2d_physics/layer_4="Projectile"
+2d_physics/layer_5="Pickup"
 
 [physics]
 

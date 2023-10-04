@@ -1,4 +1,4 @@
-extends Node2D
+class_name ExperienceDrop extends Node2D
 
 @export var amount: int = 1
 var green: Rect2 = Rect2(96, 144, 16, 16)

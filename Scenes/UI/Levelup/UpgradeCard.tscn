@@ -1,0 +1,78 @@
+[gd_scene load_steps=4 format=3 uid="uid://cpibilf1k3vo4"]
+
+[ext_resource type="Script" path="res://Scenes/UI/Levelup/Card.gd" id="1_wy4rs"]
+[ext_resource type="Resource" uid="uid://dukkem4alk62s" path="res://Scenes/Abilities/Upgrades/GlovesOfHaste.tres" id="2_6q1m8"]
+[ext_resource type="Texture2D" uid="uid://bkf0k6c1h4poy" path="res://icon.svg" id="3_txh2u"]
+
+[node name="Card" type="Button"]
+custom_minimum_size = Vector2(256, 256)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -128.0
+offset_right = 128.0
+offset_bottom = 128.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_wy4rs")
+upgrade = ExtResource("2_6q1m8")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 6
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("3_txh2u")
+expand_mode = 3
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Ability Name12345677890"
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+text_overrun_behavior = 1
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+bbcode_enabled = true
+text = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
+scroll_active = false
+shortcut_keys_enabled = false
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

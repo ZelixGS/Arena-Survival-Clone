@@ -60,6 +60,7 @@ func spawn_wave() -> void:
 		var monster: Node2D = basic_enemy.instantiate()
 		monster.properties = monster_data
 		monster.global_position = spawn_position
+		monster.rotation = 0
 		stage.add_child(monster)
 
 	timer.wait_time = wave["interval"]
