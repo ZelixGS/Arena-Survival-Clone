@@ -44,7 +44,7 @@ func spawn_wave() -> void:
 
 	var minimum: int = max(wave["minimum"] - stage.get_child_count(), 0)
 	var mobs_to_spawn: int = ceil(1 * Stats.get_spawn_rate()) + minimum
-	var spawn_cap: int = Stats.get_spawn_limit()
+	var spawn_cap: int = floor(Stats.get_spawn_limit())
 	var adjusted_count: int = min(mobs_to_spawn, spawn_cap - stage.get_child_count())
 
 	for i in adjusted_count:

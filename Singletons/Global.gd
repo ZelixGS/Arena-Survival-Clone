@@ -1,7 +1,7 @@
 extends Node
 
 enum Damage { PHYSICAL, MAGICAL, FIRE, FROST, ELECTRICAL, ACID, HOLY, DARK, HEAL }
-enum Activation { TIMER, PROC_HIT, PROC_CRIT }
+enum Activation { TIMER, DEALDAMAGE, DEALCRIT, TAKEDAMAGE }
 
 func get_player() -> Player:
 	return get_tree().get_first_node_in_group("player")

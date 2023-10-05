@@ -40,5 +40,6 @@ z_index = 3
 scale = Vector2(1.5, 1.5)
 amount = 16
 process_material = SubResource("ParticleProcessMaterial_yc7mk")
+one_shot = true
 explosiveness = 0.75
 script = ExtResource("1_12jb0")

@@ -2,7 +2,7 @@ extends Node
 
 # User Interface
 signal ui_exp
-signal ui_health
+signal ui_health(current: int, max: int)
 signal ui_damage_meter(name: String, amount: int, critical: bool)
 signal ui_enemy_count(value: int)
 signal ui_selected_upgrade(upgrade: Upgrade)

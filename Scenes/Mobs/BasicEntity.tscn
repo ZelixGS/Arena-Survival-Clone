@@ -127,7 +127,6 @@ script = ExtResource("1_as06c")
 drop_component = NodePath("../DropComponent")
 
 [node name="VelocityComponent" parent="." instance=ExtResource("3_yko3c")]
-chase_player = false
 
 [node name="DropComponent" parent="." instance=ExtResource("4_27cpu")]
 

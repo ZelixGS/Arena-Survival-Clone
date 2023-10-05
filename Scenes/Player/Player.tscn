@@ -45,8 +45,8 @@ shape = SubResource("CircleShape2D_2geww")
 
 [node name="HitboxComponent" parent="." instance=ExtResource("5_qcf22")]
 visible = false
-collision_layer = 8
-collision_mask = 8
+collision_layer = 16
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
 shape = SubResource("CircleShape2D_ceyae")

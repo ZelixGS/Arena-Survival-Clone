@@ -18,5 +18,5 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 	tween.tween_callback(despawn)
 	
 func despawn() -> void:
-	Experience.emit_signal("exp_gain", amount * Stats.get_experience_rate())
+	Experience.emit_signal("exp_gain", amount * Stats.get_experience())
 	call_deferred("queue_free")
